@@ -10,6 +10,10 @@ import scipy
 from PIL import Image
 from .load_llff import recenter_poses, spherify_poses, rerotate_poses, normalize, poses_avg, render_path_spiral, _minify, imread, depthread
 
+# added to remove errors when loading data from huggingface
+# https://blog.csdn.net/gg864461719/article/details/126016571
+imageio.plugins.freeimage.download()
+
 def _load_data(basedir, factor=None, width=None, height=None, load_imgs=True, load_depths=False):
     
     poses_arr = np.load(os.path.join(basedir, 'poses_bounds.npy'))
