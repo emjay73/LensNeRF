@@ -1,5 +1,21 @@
+# LensNeRF: Rethinking Volume Rendering Based on Thin-Lens Camera Model
+[Min-Jung Kim](emjay73.github.io), [Gyojung Gu](https://github.com/koo616/koo616.github.io), [Jaegul Choo](https://sites.google.com/site/jaegulchoo/) <br />
 
-# Environment Setup
+[[`Paper`](https://openaccess.thecvf.com/content/WACV2024/html/Kim_LensNeRF_Rethinking_Volume_Rendering_Based_on_Thin-Lens_Camera_Model_WACV_2024_paper.html)]
+[[`Code`](https://github.com/emjay73/LensNeRF)]
+[[`Data`](https://huggingface.co/datasets/emjay73/lensnerf_dataset)]
+
+## Overview
+<p align="center">
+<img src="assets/overview01.png" width=100% height=100% 
+class="center">
+</p>
+<p align="center">
+<img src="assets/overview02.png" width=100% height=100% 
+class="center">
+</p>
+
+## Environment Setup
 1. Create conda env
 ```
 conda create -n lens python=3.10
@@ -30,7 +46,7 @@ export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 export CMAKE_PREFIX_PATH=${CONDA_PREFIX:-"$(dirname $(which conda))/../"}
 ```
 
-# Prepare the Dataset
+## Prepare the Dataset
 ```
 cd LensNeRF
 mkdir data
@@ -42,7 +58,7 @@ tar -xvf lensnerf_dataset.tar.gz
 ```
 
 
-# Some noticeable Errors 
+## Some noticeable Errors 
 1)Index error 
 ```
 in _get_cuda_arch_flags
@@ -56,10 +72,10 @@ following might help
 export TORCH_CUDA_ARCH_LIST="3.5;5.0;6.0;6.1;7.0;7.5;8.0;8.6+PTX"
 ```
 
-# How to Run
+## How to Run
 Our work is trained on A100 or V100 GPU.
 
-## Activate Env
+### Activate Env
 ```
 mkdir logs
 mkdir build
@@ -67,7 +83,7 @@ export TORCH_EXTENSIONS_DIR=build/torch_extensions
 export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
 conda activate lens
 ```
-## Train
+### Train
 ```
 # sh scripts_kisti/train_ours.sh [DATANAME] [MODE]
 sh scripts_kisti/train_ours.sh AmusementPark train
@@ -85,13 +101,13 @@ Sheep
 Snowman
 Xmas
 ```
-## Render
+### Render
 ```
 # sh scripts_kisti/train_ours.sh [DATANAME] [MODE]
 sh scripts_kisti/train_ours.sh AmusementPark render
 ```
 
-# Thanks Note
+## Thanks Note
 Our code is based on the DirectVoxGO implementation.\
 Huge thanks for the amazing work by the authors of DVGO!\
 \
