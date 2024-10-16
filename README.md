@@ -1,23 +1,20 @@
 # Environment Setup
 1. Create conda env
 ```
-conda create -n lens
+conda create -n lens python=3.10
 conda activate lens
-conda install python==3.8.13
 ```
 
-2. Install pytorch and torch scatter
-Be aware that pytorch version should be carfully selected based on YOUR environment.
-Following command shows our environment.
+2. Install pytorch and torch scatter.\
+Be aware that pytorch version should be carfully selected based on YOUR environment.\
+The following command lines show how our environment was set up for reference.
 ```
-conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch-lts -c nvidia
-wget https://data.pyg.org/whl/torch-1.8.0%2Bcu111/torch_scatter-2.0.8-cp38-cp38-linux_x86_64.whl
-pip install torch_scatter-2.0.8-cp38-cp38-linux_x86_64.whl
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia -y
 ```
 
 3. Install Dependencies
 ```
-pip install -r requirements
+pip install -r requirements.txt
 ```
 
 4. make cuda available (Our code is tested with CUDA 11.4)
@@ -32,14 +29,14 @@ export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 export CMAKE_PREFIX_PATH=${CONDA_PREFIX:-"$(dirname $(which conda))/../"}
 ```
 
-
-5. link dataset
+5. prepare the dataset
 ```
 cd LensNeRF
 mkdir data
 cd data
 git lfs install
 git clone https://huggingface.co/datasets/emjay73/lensnerf_dataset
+```
 
 # Some noticeable Errors 
 1)Index error 
@@ -55,9 +52,28 @@ following might help
 export TORCH_CUDA_ARCH_LIST="3.5;5.0;6.0;6.1;7.0;7.5;8.0;8.6+PTX"
 ```
 
+# How to Run
+Our work is trained on A100 or V100 GPU.
+
+## Activate Env
+```
+mkdir logs
+mkdir build
+export TORCH_EXTENSIONS_DIR=build/torch_extensions
+export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
+conda activate lens
+```
+## Train
+```
+sh scripts_kisti/train_ours.sh AmusementPark train
+```
+## Render
+```
+sh scripts_kisti/train_ours.sh AmusementPark render
+```
+
 # Thanks Note
-Our code is based on the DirectVoxGO implementation.
-Huge thanks for the amaing work by the authors of DVGO!
-
+Our code is based on the DirectVoxGO implementation.\
+Huge thanks for the amaing work by the authors of DVGO!\
+\
 Direct Voxel Grid Optimization (CVPR2022 Oral, [project page](https://sunset1995.github.io/dvgo/), [DVGO paper](https://arxiv.org/abs/2111.11215), [DVGO v2 paper](https://arxiv.org/abs/2206.05085)).
-
