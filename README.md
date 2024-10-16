@@ -6,8 +6,8 @@
 [[`Data`](https://huggingface.co/datasets/emjay73/lensnerf_dataset)]
 
 ## Overview
-<p align="center">
-<img src="assets/overview01.png" width=100% height=100% 
+<p align="left">
+<img src="assets/overview01.png" width=50% height=50% 
 class="center">
 </p>
 <p align="center">
