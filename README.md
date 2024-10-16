@@ -1,3 +1,4 @@
+
 # Environment Setup
 1. Create conda env
 ```
@@ -29,14 +30,17 @@ export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 export CMAKE_PREFIX_PATH=${CONDA_PREFIX:-"$(dirname $(which conda))/../"}
 ```
 
-5. prepare the dataset
+# Prepare the Dataset
 ```
 cd LensNeRF
 mkdir data
 cd data
 git lfs install
 git clone https://huggingface.co/datasets/emjay73/lensnerf_dataset
+cd lensnerf_dataset
+tar -xvf lensnerf_dataset.tar.gz
 ```
+
 
 # Some noticeable Errors 
 1)Index error 
@@ -65,15 +69,30 @@ conda activate lens
 ```
 ## Train
 ```
+# sh scripts_kisti/train_ours.sh [DATANAME] [MODE]
 sh scripts_kisti/train_ours.sh AmusementPark train
+```
+
+Possible dataset names are as follows.
+```
+AmusementPark
+AppleMint
+Bear
+BoyAndGirl
+Chrysanthemum
+Gink
+Sheep
+Snowman
+Xmas
 ```
 ## Render
 ```
+# sh scripts_kisti/train_ours.sh [DATANAME] [MODE]
 sh scripts_kisti/train_ours.sh AmusementPark render
 ```
 
 # Thanks Note
 Our code is based on the DirectVoxGO implementation.\
-Huge thanks for the amaing work by the authors of DVGO!\
+Huge thanks for the amazing work by the authors of DVGO!\
 \
 Direct Voxel Grid Optimization (CVPR2022 Oral, [project page](https://sunset1995.github.io/dvgo/), [DVGO paper](https://arxiv.org/abs/2111.11215), [DVGO v2 paper](https://arxiv.org/abs/2206.05085)).
